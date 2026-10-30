@@ -1,0 +1,58 @@
+[gd_scene load_steps=13 format=3 uid="uid://cvaaqtcutnrle"]
+
+[ext_resource type="Texture2D" uid="uid://dej5fmf3lt6si" path="res://Textures/Grass.jpg" id="1_oalv4"]
+[ext_resource type="PackedScene" uid="uid://taegciql1ata" path="res://Scene/character_body_3d.tscn" id="1_tu5cy"]
+[ext_resource type="Texture2D" uid="uid://bls8f6ipav1nn" path="res://Textures/Rocks.webp" id="3_n4jp5"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_nitxl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cqxdw"]
+albedo_texture = ExtResource("1_oalv4")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_tu5cy"]
+
+[sub_resource type="Environment" id="Environment_vgid3"]
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_oalv4"]
+
+[sub_resource type="Compositor" id="Compositor_n4jp5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tu5cy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2dt0b"]
+albedo_texture = ExtResource("3_n4jp5")
+
+[sub_resource type="BoxMesh" id="BoxMesh_vgid3"]
+
+[node name="Test_Map" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.55268, 0, 0, 0, 1, 0, 0, 0, 1.6853, 0, 0, 0)
+shape = SubResource("WorldBoundaryShape3D_nitxl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+transform = Transform3D(10.005, 0, 0, 0, 1, 0, 0, 0, 9.99592, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_cqxdw")
+mesh = SubResource("PlaneMesh_tu5cy")
+skeleton = NodePath("../..")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.999615, 0.0201294, -0.0190974, 0, 0.688266, 0.725459, 0.0277471, 0.725179, -0.688001, 0, 30.8319, -22.1334)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="DirectionalLight3D"]
+environment = SubResource("Environment_vgid3")
+camera_attributes = SubResource("CameraAttributesPractical_oalv4")
+compositor = SubResource("Compositor_n4jp5")
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("1_tu5cy")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(8.03392, 0, 0, 0, 22.2877, 0, 0, 0, 9.12044, 0, 8.43126, 7.42888)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_tu5cy")
+debug_color = Color(0.494174, 0.448643, 0.956573, 0.42)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+material_override = SubResource("StandardMaterial3D_2dt0b")
+mesh = SubResource("BoxMesh_vgid3")

@@ -1,0 +1,53 @@
+[gd_scene load_steps=4 format=3 uid="uid://taegciql1ata"]
+
+[ext_resource type="Script" uid="uid://drf14m7omwvyd" path="res://Codes/CachoCabra.gd" id="1_5esds"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_t3pcq"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dsmve"]
+
+[node name="CharacterBody3D" type="CharacterBody3D" groups=["players"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2718, 0)
+script = ExtResource("1_5esds")
+speed = null
+jump_velocity = null
+gravity = null
+climb_camera_horizontal_limit = null
+climb_camera_vertical_limit = null
+mouse_sensitivity = null
+camera_limit = null
+climb_speed = null
+ray_distance = null
+stick_to_wall_force = null
+climb_smoothness = null
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_t3pcq")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_dsmve")
+
+[node name="Neck" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="Neck"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.561004, 0)
+
+[node name="ClimbRay_Up" type="RayCast3D" parent="Neck"]
+transform = Transform3D(1, 0, 0, 0, -0.755442, -0.655216, 0, 0.655216, -0.755442, 0, 0.741376, -0.482321)
+
+[node name="ClimbRay_Central" type="RayCast3D" parent="Neck"]
+transform = Transform3D(1, 0, 0, 0, -0.0686944, -0.997638, 0, 0.997638, -0.0686944, 0, 0.309452, -0.510488)
+
+[node name="ClimbRay_Down" type="RayCast3D" parent="Neck"]
+transform = Transform3D(1, 0, 0, 0, 0.548279, -0.836296, 0, 0.836296, 0.548279, 0, -0.220304, -0.484153)
+
+[node name="ClimbRay_Left" type="RayCast3D" parent="Neck"]
+transform = Transform3D(0.687734, 0.724848, -0.0402081, 0, -0.0553859, -0.998465, -0.725963, 0.686678, -0.0380908, -0.134681, 0.477243, -0.419342)
+
+[node name="ClimbRay_Right" type="RayCast3D" parent="Neck"]
+transform = Transform3D(0.53298, -0.84507, 0.0423068, 0, -0.0500005, -0.998749, 0.846128, 0.532313, -0.0266492, 0.249638, 0.489518, -0.467259)
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.12819, -0.99175, 0, 0.99175, -0.12819, 0, 0.472702, -0.510488)
